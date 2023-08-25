@@ -13,6 +13,14 @@ const App = () => {
     })
   }
 
+  const deleteNote = id => {
+    setNotes(prevNotes => {
+      return prevNotes.filter((elem, i) => {
+        return i !== id
+      })
+    })
+  }
+
   return (
     <div>
       <Header />
@@ -22,6 +30,8 @@ const App = () => {
           key={i}
           title={note.title}
           content={note.content}
+          onDelete={deleteNote}
+          id={i}
         />
       ))}
       <Footer />
