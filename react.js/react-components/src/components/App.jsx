@@ -15,7 +15,7 @@ const App = () => {
 
   const deleteNote = id => {
     setNotes(prevNotes => {
-      return prevNotes.filter((elem, i) => {
+      return prevNotes.filter((_elem, i) => {
         return i !== id
       })
     })
