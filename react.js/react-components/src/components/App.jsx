@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import createNote from './Note'
-import notes from '../notes'
+import CreateArea from './CreateArea'
+import Note from './Note'
 
 const App = () => {
+  const [notes, setNotes] = useState([])
+
+  const addNew = note => {
+    setNotes(prevNotes => {
+      return [...prevNotes, note]
+    })
+  }
+
   return (
-    <React.StrictMode>
+    <div>
       <Header />
-      {notes.map(createNote)}
+      <CreateArea onNew={addNew} />
+      {notes.map((note, i) => (
+        <Note
+          key={i}
+          title={note.title}
+          content={note.content}
+        />
+      ))}
       <Footer />
-    </React.StrictMode>
+    </div>
   )
 }
 

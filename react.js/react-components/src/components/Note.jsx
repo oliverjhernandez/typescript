@@ -1,28 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-const createNote = details => {
-  return (
-    <Note
-      key={details.key}
-      title={details.title}
-      content={details.content}
-    />
-  )
-}
-
-const Note = props => {
+function Note(props) {
   return (
     <div className="note">
       <h1>{props.title}</h1>
       <p>{props.content}</p>
+      <button>DELETE</button>
     </div>
   )
 }
 
 Note.propTypes = {
-  title : PropTypes.string,
-  content : PropTypes.string
+  title: PropTypes.string,
+  content: PropTypes.string
 }
 
-export default createNote
+export default Note
