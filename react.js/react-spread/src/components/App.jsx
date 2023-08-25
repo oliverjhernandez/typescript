@@ -27,7 +27,6 @@ function App() {
       <div />
       <InputArea
         onNew={addItem}
-        event={event}
       />
       <div>
         <ul>

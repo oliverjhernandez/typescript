@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const InputArea = (props) => {
+const InputArea = props => {
   const [inputText, setInputText] = useState('')
 
   const handleChange = event => {
@@ -17,10 +17,12 @@ const InputArea = (props) => {
         name="listInput"
         value={inputText}
       />
-      <button onClick={() => {
-        props.onNew(inputText)
-        setInputText('')
-      }}>
+      <button
+        onClick={() => {
+          props.onNew(inputText)
+          setInputText('')
+        }}
+      >
         <span>Add</span>
       </button>
     </div>
