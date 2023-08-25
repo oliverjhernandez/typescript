@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import NoteAddIcon from '@mui/icons-material/NoteAdd'
+import Fab from '@mui/material/Fab'
+import Zoom from '@mui/material/Zoom'
 
 const CreateArea = props => {
   const [note, setNote] = useState({
@@ -8,7 +11,7 @@ const CreateArea = props => {
   })
 
   const handleChange = event => {
-    const {name, value} = event.target
+    const { name, value } = event.target
     setNote(prevValue => {
       return {
         ...prevValue,
@@ -23,7 +26,10 @@ const CreateArea = props => {
 
   return (
     <div>
-      <form className="create-note" onSubmit={handleSubmit}>
+      <form
+        className="create-note"
+        onSubmit={handleSubmit}
+      >
         <input
           onChange={handleChange}
           name="title"
@@ -37,14 +43,16 @@ const CreateArea = props => {
           rows="3"
           value={note.content}
         />
-        <button
-          onClick={() => {
-            props.onNew({ title: note.title, content: note.content }, 'hello')
-            setNote({ title: '', content: '' })
-          }}
-        >
-          Add
-        </button>
+        <Zoom in={true}>
+          <Fab
+            onClick={() => {
+              props.onNew({ title: note.title, content: note.content }, 'hello')
+              setNote({ title: '', content: '' })
+            }}
+          >
+            <NoteAddIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   )
