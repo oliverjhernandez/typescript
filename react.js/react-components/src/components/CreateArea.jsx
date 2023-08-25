@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const CreateArea = props => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [note, setNote] = useState({
+    title: '',
+    content: ''
+  })
 
-  const handleTitleChange = event => {
-    const newValue = event.target.value
-    setTitle(newValue)
-  }
-
-  const handleContentChange = event => {
-    const newValue = event.target.value
-    setContent(newValue)
+  const handleChange = event => {
+    const {name, value} = event.target
+    setNote(prevValue => {
+      return {
+        ...prevValue,
+        [name]: value
+      }
+    })
   }
 
   const handleSubmit = event => {
@@ -21,25 +23,24 @@ const CreateArea = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="create-note" onSubmit={handleSubmit}>
         <input
-          onChange={handleTitleChange}
+          onChange={handleChange}
           name="title"
           placeholder="Title"
-          value={title}
+          value={note.title}
         />
         <textarea
-          onChange={handleContentChange}
+          onChange={handleChange}
           name="content"
           placeholder="Take a note..."
           rows="3"
-          value={content}
+          value={note.content}
         />
         <button
           onClick={() => {
-            props.onNew({ title: title, content: content }, 'hello')
-            setTitle('')
-            setContent('')
+            props.onNew({ title: note.title, content: note.content }, 'hello')
+            setNote({ title: '', content: '' })
           }}
         >
           Add
