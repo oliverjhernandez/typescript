@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import Item from './Item'
+import Item from './Item'
 
 function App() {
   const [inputText, setInputText] = useState('')
@@ -14,7 +14,7 @@ function App() {
     setItems(prevValues => {
       return [...prevValues, inputText]
     })
-    setInputText("")
+    setInputText('')
   }
 
   return (
@@ -35,8 +35,12 @@ function App() {
       </div>
       <div>
         <ul>
-          {items.map(todoItem => (
-            <li key={todoItem.key}>{todoItem}</li>
+          {items.map((todoItem, i) => (
+            <Item
+              todoItem={todoItem}
+              key={i}
+            />
+            // console.log(todoItem)
           ))}
         </ul>
       </div>
