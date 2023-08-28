@@ -10,6 +10,8 @@ const CreateArea = props => {
     content: ''
   })
 
+  const [isExpanded, setExpanded] = useState(false)
+
   const handleChange = event => {
     const { name, value } = event.target
     setNote(prevValue => {
@@ -24,26 +26,33 @@ const CreateArea = props => {
     event.preventDefault()
   }
 
+  const expand = () => {
+    setExpanded(true)
+  }
+
   return (
     <div>
       <form
         className="create-note"
         onSubmit={handleSubmit}
       >
-        <input
-          onChange={handleChange}
-          name="title"
-          placeholder="Title"
-          value={note.title}
-        />
+        {isExpanded && (
+          <input
+            onChange={handleChange}
+            name="title"
+            placeholder="Title"
+            value={note.title}
+          />
+        )}
         <textarea
           onChange={handleChange}
+          onClick={expand}
           name="content"
           placeholder="Take a note..."
-          rows="3"
+          rows={isExpanded ? 3 : 1}
           value={note.content}
         />
-        <Zoom in={true}>
+        <Zoom in={isExpanded ? true : false}>
           <Fab
             onClick={() => {
               props.onNew({ title: note.title, content: note.content }, 'hello')
